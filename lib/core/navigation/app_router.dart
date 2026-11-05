@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:nodos_chain_app/features/add_habit/presentation/screens/add_habit_screen.dart';
+import 'package:nodos_chain_app/features/habits/presentation/screens/habits_screen.dart';
 import 'package:nodos_chain_app/features/home/presentation/screens/home_screen.dart';
 import 'package:nodos_chain_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:nodos_chain_app/features/stats/presentation/screens/stats_screen.dart';
@@ -14,6 +15,10 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/habits',
+        builder: (context, state) => const HabitsScreen(),
       ),
       GoRoute(
         path: '/add-habit',

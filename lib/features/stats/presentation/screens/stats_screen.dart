@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nodos_chain_app/core/theme/app_colors.dart';
 import 'package:nodos_chain_app/widgets/common/custom_bottom_nav_bar.dart';
 
-/// İstatistikler ve zincirlerin durumu ekranı.
+/// İstatistikler ve zincirlerin raporları ekranı (Reports).
 class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
 
@@ -27,27 +27,31 @@ class _StatsBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Zincir İstatistikleri',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.lightTextPrimary,
-                      ),
+                Row(
+                  children: [
+                    Text(
+                      'Raporlar & İstatistikler',
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: isDark
+                                    ? AppColors.darkTextPrimary
+                                    : AppColors.lightTextPrimary,
+                              ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 Text(
-                  'Toplam 3 aktif zincrin var, en uzun olan 12 gün.',
+                  'Toplam 3 aktif zincirin var, en uzun zincirin 12 gün.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: isDark
                             ? AppColors.darkTextSecondary
                             : AppColors.lightTextSecondary,
-                        fontSize: 15,
                       ),
                 ),
               ],
@@ -63,29 +67,32 @@ class _StatsBody extends StatelessWidget {
                 title: 'Toplam Aktif Zincir',
                 value: '3',
                 subtitle: 'Devam eden alışkanlıklar',
+                icon: Icons.link_rounded,
                 isDark: isDark,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 14),
               _statCard(
                 context: context,
                 title: 'En Uzun Zincir',
-                value: '12 gün',
+                value: '12 Gün',
                 subtitle: 'Sabah Yürüyüşü',
+                icon: Icons.local_fire_department_rounded,
                 isDark: isDark,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 14),
               _statCard(
                 context: context,
-                title: 'Başarı Oranı',
+                title: 'Genel Başarı Oranı',
                 value: '%78',
-                subtitle: 'Tamamlanan görevler / toplam',
+                subtitle: 'Tamamlanan görevler / toplam hedef',
+                icon: Icons.insights_rounded,
                 isDark: isDark,
               ),
             ]),
           ),
         ),
         const SliverToBoxAdapter(
-          child: SizedBox(height: 100),
+          child: SizedBox(height: 110),
         ),
       ],
     );
@@ -96,6 +103,7 @@ class _StatsBody extends StatelessWidget {
     required String title,
     required String value,
     required String subtitle,
+    required IconData icon,
     required bool isDark,
   }) {
     return Container(
@@ -103,50 +111,73 @@ class _StatsBody extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.06)
-              : Colors.black.withValues(alpha: 0.04),
+          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
           width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.04),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: isDark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.lightTextSecondary,
-                  fontWeight: FontWeight.w600,
-                ),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? AppColors.darkSurfaceSecondary
+                  : AppColors.lightNavPill,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.accent,
+              size: 26,
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.accent,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: isDark
+                        ? AppColors.darkTextSecondary
+                        : AppColors.lightTextSecondary,
+                  ),
                 ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: isDark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.lightTextSecondary,
-                  fontSize: 13,
+                const SizedBox(height: 4),
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                    color: isDark
+                        ? AppColors.darkTextPrimary
+                        : AppColors.lightTextPrimary,
+                  ),
                 ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark
+                        ? AppColors.darkTextMuted
+                        : AppColors.lightTextMuted,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

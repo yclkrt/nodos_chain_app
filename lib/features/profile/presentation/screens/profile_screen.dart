@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nodos_chain_app/core/theme/app_colors.dart';
 import 'package:nodos_chain_app/widgets/common/custom_bottom_nav_bar.dart';
 
-/// Profil ve ayarlar ekranı.
+/// Ayarlar ve kullanıcı profili ekranı (Settings).
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -27,19 +27,30 @@ class _ProfileBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 16),
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 44,
-                  backgroundColor: AppColors.accent.withValues(alpha: 0.15),
-                  child: const Icon(
-                    Icons.person_rounded,
-                    size: 44,
-                    color: AppColors.accent,
+                // Profil Avatarı
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.accent,
+                      width: 2,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundColor: AppColors.nodosDark,
+                    child: const Icon(
+                      Icons.person_rounded,
+                      size: 40,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
                 Text(
                   'Kullanıcı',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -51,34 +62,47 @@ class _ProfileBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'nodos_chain_app',
+                  'NODOS - Zinciri Kırma',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: isDark
                             ? AppColors.darkTextSecondary
                             : AppColors.lightTextSecondary,
-                        fontSize: 14,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
                       ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 28),
+
+                // Ayarlar Menü Listesi
                 _menuItem(
                   context: context,
-                  icon: Icons.notifications_rounded,
-                  label: 'Bildirimler',
+                  icon: Icons.notifications_outlined,
+                  label: 'Hatırlatıcı & Bildirimler',
+                  subtitle: 'Günlük zincir hatırlatıcıları',
                   isDark: isDark,
                 ),
                 _menuItem(
                   context: context,
-                  icon: Icons.dark_mode_rounded,
-                  label: 'Koyu Tema',
+                  icon: Icons.dark_mode_outlined,
+                  label: 'Karanlık Tema',
+                  subtitle: 'Sistem temasına uygun',
                   isDark: isDark,
                 ),
                 _menuItem(
                   context: context,
-                  icon: Icons.info_rounded,
-                  label: 'Hakkında',
+                  icon: Icons.backup_outlined,
+                  label: 'Yedekleme & Veri',
+                  subtitle: 'Alışkanlık geçmişini sakla',
                   isDark: isDark,
                 ),
-                const SizedBox(height: 100),
+                _menuItem(
+                  context: context,
+                  icon: Icons.info_outline_rounded,
+                  label: 'NODOS Hakkında',
+                  subtitle: 'Sürüm 1.0.0 (Zinciri Kırma)',
+                  isDark: isDark,
+                ),
+                const SizedBox(height: 110),
               ],
             ),
           ),
@@ -91,6 +115,7 @@ class _ProfileBody extends StatelessWidget {
     required BuildContext context,
     required IconData icon,
     required String label,
+    required String subtitle,
     required bool isDark,
   }) {
     return Container(
@@ -98,45 +123,58 @@ class _ProfileBody extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.04),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.06)
-              : Colors.black.withValues(alpha: 0.04),
-          width: 1,
-        ),
       ),
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         leading: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: AppColors.accent.withValues(alpha: 0.12),
+            color: isDark
+                ? AppColors.darkSurfaceSecondary
+                : AppColors.lightNavPill,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(
             icon,
-            color: AppColors.accent,
+            color: isDark ? Colors.white : AppColors.nodosDark,
             size: 22,
           ),
         ),
         title: Text(
           label,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: isDark
-                    ? AppColors.darkTextPrimary
-                    : AppColors.lightTextPrimary,
-              ),
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 15,
+            color: isDark
+                ? AppColors.darkTextPrimary
+                : AppColors.lightTextPrimary,
+          ),
         ),
-        trailing: const Icon(
+        subtitle: Text(
+          subtitle,
+          style: TextStyle(
+            fontSize: 12,
+            color: isDark
+                ? AppColors.darkTextMuted
+                : AppColors.lightTextMuted,
+          ),
+        ),
+        trailing: Icon(
           Icons.chevron_right_rounded,
-          color: AppColors.lightTextSecondary,
+          color: isDark
+              ? AppColors.darkTextMuted
+              : AppColors.lightTextMuted,
           size: 22,
         ),
       ),

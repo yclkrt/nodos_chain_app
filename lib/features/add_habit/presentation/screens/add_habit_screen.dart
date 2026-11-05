@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nodos_chain_app/core/theme/app_colors.dart';
 import 'package:nodos_chain_app/widgets/common/custom_bottom_nav_bar.dart';
 
-/// Yeni alışkanlık ekleme ekranı (merkezi FAB ile açılır).
+/// Yeni alışkanlık ekleme ekranı (merkezi ND butonu ile açılır).
 class AddHabitScreen extends StatelessWidget {
   const AddHabitScreen({super.key});
 
@@ -27,24 +28,44 @@ class _AddHabitBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.chevron_left_rounded),
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.lightTextPrimary,
+                    GestureDetector(
+                      onTap: () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go('/');
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? AppColors.darkSurfaceSecondary
+                              : AppColors.lightNavPill,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          Icons.chevron_left_rounded,
+                          color: isDark
+                              ? AppColors.darkTextPrimary
+                              : AppColors.lightTextPrimary,
+                          size: 24,
+                        ),
+                      ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 14),
                     Expanded(
                       child: Text(
                         'Yeni Alışkanlık',
-                        style: Theme.of(context).textTheme.headlineMedium
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
                             ?.copyWith(
                               fontWeight: FontWeight.w800,
                               color: isDark
@@ -57,52 +78,67 @@ class _AddHabitBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Zincirinizi başlatmak için yeni bir alışkanlık ekleyin.',
+                  'Zincirini başlatmak için yeni bir alışkanlık oluştur.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.lightTextSecondary,
-                    fontSize: 15,
-                  ),
+                        color: isDark
+                            ? AppColors.darkTextSecondary
+                            : AppColors.lightTextSecondary,
+                      ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 28),
                 _inputField(
                   context: context,
-                  label: 'Alışkanlık adı',
-                  hint: 'Örn. Sabah yürüyüşü',
+                  label: 'Alışkanlık Adı',
+                  hint: 'Örn. 30 dk Kitap Okuma',
+                  icon: Icons.edit_note_rounded,
                   isDark: isDark,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 18),
                 _inputField(
                   context: context,
-                  label: 'Hedef gün sayısı',
-                  hint: 'Örn. 21 gün',
+                  label: 'Hedef Gün Sayısı',
+                  hint: 'Örn. 21 veya 30 gün',
+                  icon: Icons.flag_rounded,
                   isDark: isDark,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
                 SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/');
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.accent,
+                      backgroundColor: AppColors.nodosDark,
                       foregroundColor: Colors.white,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: const Text(
-                      'Zinciri Başlat',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.link_rounded, size: 20),
+                        SizedBox(width: 8),
+                        Text(
+                          'Zinciri Başlat',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 110),
               ],
             ),
           ),
@@ -115,6 +151,7 @@ class _AddHabitBody extends StatelessWidget {
     required BuildContext context,
     required String label,
     required String hint,
+    required IconData icon,
     required bool isDark,
   }) {
     return Column(
@@ -122,8 +159,9 @@ class _AddHabitBody extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
             color: isDark
                 ? AppColors.darkTextPrimary
                 : AppColors.lightTextPrimary,
@@ -137,14 +175,24 @@ class _AddHabitBody extends StatelessWidget {
                 : AppColors.lightTextPrimary,
           ),
           decoration: InputDecoration(
+            prefixIcon: Icon(
+              icon,
+              color: isDark
+                  ? AppColors.darkTextMuted
+                  : AppColors.lightTextMuted,
+              size: 22,
+            ),
             hintText: hint,
             hintStyle: TextStyle(
+              fontSize: 14,
               color: isDark
-                  ? AppColors.darkTextSecondary
-                  : AppColors.lightTextSecondary,
+                  ? AppColors.darkTextMuted
+                  : AppColors.lightTextMuted,
             ),
             filled: true,
-            fillColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+            fillColor: isDark
+                ? AppColors.darkSurface
+                : AppColors.lightSurface,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 16,
@@ -152,14 +200,15 @@ class _AddHabitBody extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.08)
-                    : Colors.black.withValues(alpha: 0.08),
+                color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: AppColors.accent, width: 1.5),
+              borderSide: const BorderSide(
+                color: AppColors.accent,
+                width: 1.5,
+              ),
             ),
           ),
         ),
