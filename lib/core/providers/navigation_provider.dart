@@ -26,28 +26,28 @@ class BottomNavItemData {
   /// Görseldeki Model 1'e uygun 4 standart sekme (Merkezi buton ayrıca render edilir)
   static const List<BottomNavItemData> items = [
     BottomNavItemData(
-      label: 'Home',
+      label: 'Anasayfa',
       icon: Icons.calendar_today_outlined,
       activeIcon: Icons.calendar_today_rounded,
       section: BottomNavSection.home,
       route: '/',
     ),
     BottomNavItemData(
-      label: 'Habits',
+      label: 'Zincirler',
       icon: Icons.format_list_bulleted_rounded,
       activeIcon: Icons.format_list_bulleted_rounded,
       section: BottomNavSection.habits,
       route: '/habits',
     ),
     BottomNavItemData(
-      label: 'Reports',
+      label: 'Raporlar',
       icon: Icons.bar_chart_rounded,
       activeIcon: Icons.bar_chart_rounded,
       section: BottomNavSection.reports,
       route: '/stats',
     ),
     BottomNavItemData(
-      label: 'Settings',
+      label: 'Profil',
       icon: Icons.settings_outlined,
       activeIcon: Icons.settings_rounded,
       section: BottomNavSection.settings,

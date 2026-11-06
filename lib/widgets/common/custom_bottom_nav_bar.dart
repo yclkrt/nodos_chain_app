@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -41,9 +42,7 @@ class CustomBottomNavBar extends ConsumerWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(
-                      alpha: isDark ? 0.40 : 0.08,
-                    ),
+                    color: Colors.black.withValues(alpha: isDark ? 0.40 : 0.08),
                     blurRadius: 28,
                     offset: const Offset(0, 10),
                   ),
@@ -54,7 +53,7 @@ class CustomBottomNavBar extends ConsumerWidget {
                   // 1. Home
                   Expanded(
                     child: _BottomNavTab(
-                      label: 'Home',
+                      label: 'Anasayfa',
                       icon: Icons.calendar_today_outlined,
                       activeIcon: Icons.calendar_today_rounded,
                       route: '/',
@@ -70,7 +69,7 @@ class CustomBottomNavBar extends ConsumerWidget {
                   // 2. Habits
                   Expanded(
                     child: _BottomNavTab(
-                      label: 'Habits',
+                      label: 'Zincirler',
                       icon: Icons.format_list_bulleted_rounded,
                       activeIcon: Icons.format_list_bulleted_rounded,
                       route: '/habits',
@@ -95,7 +94,7 @@ class CustomBottomNavBar extends ConsumerWidget {
                   // 4. Reports
                   Expanded(
                     child: _BottomNavTab(
-                      label: 'Reports',
+                      label: 'Raporlar',
                       icon: Icons.bar_chart_rounded,
                       activeIcon: Icons.bar_chart_rounded,
                       route: '/stats',
@@ -111,7 +110,7 @@ class CustomBottomNavBar extends ConsumerWidget {
                   // 5. Settings
                   Expanded(
                     child: _BottomNavTab(
-                      label: 'Settings',
+                      label: 'Profil',
                       icon: Icons.tune_rounded,
                       activeIcon: Icons.tune_rounded,
                       route: '/profile',
@@ -189,8 +188,8 @@ class _BottomNavTabState extends State<_BottomNavTab> {
               decoration: BoxDecoration(
                 color: widget.isSelected
                     ? (widget.isDark
-                        ? AppColors.darkNavPill
-                        : AppColors.lightNavPill)
+                          ? AppColors.darkNavPill
+                          : AppColors.lightNavPill)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(14),
               ),
@@ -205,8 +204,9 @@ class _BottomNavTabState extends State<_BottomNavTab> {
               widget.label,
               style: TextStyle(
                 fontSize: 10.5,
-                fontWeight:
-                    widget.isSelected ? FontWeight.w700 : FontWeight.w500,
+                fontWeight: widget.isSelected
+                    ? FontWeight.w700
+                    : FontWeight.w500,
                 color: widget.isSelected ? activeTextColor : inactiveTextColor,
                 letterSpacing: 0.1,
               ),
@@ -259,10 +259,7 @@ class _CenterActionTabState extends State<_CenterActionTab> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF2C323E),
-                    Color(0xFF1A1D24),
-                  ],
+                  colors: [Color(0xFF2C323E), Color(0xFF1A1D24)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -270,8 +267,8 @@ class _CenterActionTabState extends State<_CenterActionTab> {
                   color: widget.isSelected
                       ? AppColors.accent
                       : (widget.isDark
-                          ? Colors.white.withValues(alpha: 0.15)
-                          : Colors.white),
+                            ? Colors.white.withValues(alpha: 0.15)
+                            : Colors.white),
                   width: widget.isSelected ? 2 : 1.5,
                 ),
                 boxShadow: [
@@ -294,16 +291,17 @@ class _CenterActionTabState extends State<_CenterActionTab> {
             ),
             const SizedBox(height: 2),
             Text(
-              'New Habit',
+              'Yeni Zincir',
               style: TextStyle(
                 fontSize: 9.5,
-                fontWeight:
-                    widget.isSelected ? FontWeight.w700 : FontWeight.w600,
+                fontWeight: widget.isSelected
+                    ? FontWeight.w700
+                    : FontWeight.w600,
                 color: widget.isSelected
                     ? AppColors.accent
                     : (widget.isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.lightTextSecondary),
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary),
               ),
             ),
           ],
