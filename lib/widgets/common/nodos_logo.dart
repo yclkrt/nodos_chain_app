@@ -25,7 +25,7 @@ class NodosLogo extends StatelessWidget {
         width: size,
         height: size,
         fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => _buildVectorLogo(context),
+        errorBuilder: (_, _, _) => _buildVectorLogo(context),
       );
     }
     return _buildVectorLogo(context);
@@ -51,10 +51,7 @@ class NodosLogo extends StatelessWidget {
 
 /// "ND" harflerini ve ortasındaki açılı zincir halkasını çizen CustomPainter.
 class _NodosMonogramPainter extends CustomPainter {
-  _NodosMonogramPainter({
-    required this.primaryColor,
-    required this.chainColor,
-  });
+  _NodosMonogramPainter({required this.primaryColor, required this.chainColor});
 
   final Color primaryColor;
   final Color chainColor;
@@ -97,14 +94,7 @@ class _NodosMonogramPainter extends CustomPainter {
     dPath.lineTo(w * 0.54, h * 0.22);
     // D sağ kavis
     dPath.lineTo(w * 0.68, h * 0.22);
-    dPath.cubicTo(
-      w * 0.92,
-      h * 0.22,
-      w * 0.92,
-      h * 0.82,
-      w * 0.68,
-      h * 0.82,
-    );
+    dPath.cubicTo(w * 0.92, h * 0.22, w * 0.92, h * 0.82, w * 0.68, h * 0.82);
     dPath.close();
     canvas.drawPath(dPath, letterPaint);
 
@@ -114,11 +104,7 @@ class _NodosMonogramPainter extends CustomPainter {
     canvas.rotate(-0.55); // ~ -31 derece açı
 
     final chainRect = RRect.fromRectAndRadius(
-      Rect.fromCenter(
-        center: Offset.zero,
-        width: w * 0.36,
-        height: h * 0.18,
-      ),
+      Rect.fromCenter(center: Offset.zero, width: w * 0.36, height: h * 0.18),
       Radius.circular(h * 0.09),
     );
 
@@ -141,4 +127,3 @@ class _NodosMonogramPainter extends CustomPainter {
         oldDelegate.chainColor != chainColor;
   }
 }
-

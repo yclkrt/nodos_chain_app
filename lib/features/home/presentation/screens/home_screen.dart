@@ -80,57 +80,61 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'NODOS',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 2.2,
-                                color: isDark
-                                    ? AppColors.darkTextPrimary
-                                    : AppColors.lightTextPrimary,
-                              ),
-                            ),
-                            const SizedBox(width: 6),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                                vertical: 2,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.accent.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Text(
-                                'ZİNCİR',
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'NODOS',
                                 style: TextStyle(
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w800,
-                                  color: AppColors.accent,
-                                  letterSpacing: 0.8,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 2.2,
+                                  color: isDark
+                                      ? AppColors.darkTextPrimary
+                                      : AppColors.lightTextPrimary,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          'Zinciri Kırma, Alışkanlığını Kazan',
-                          style: TextStyle(
-                            fontSize: 11.5,
-                            fontWeight: FontWeight.w500,
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary,
+                              const SizedBox(width: 6),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.accent.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: const Text(
+                                  'ZİNCİR',
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.accent,
+                                    letterSpacing: 0.8,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          Text(
+                            'Zinciri Kırma, Alışkanlığını Kazan',
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w500,
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.lightTextSecondary,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ],
+                      ),
                     ),
-                    const Spacer(),
+                    const SizedBox(width: 8),
                     // Seri rozeti (Streak Flame)
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -200,75 +204,75 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: List.generate(_weekDays.length, (index) {
                       final item = _weekDays[index];
                       final isSelected = _selectedDayIndex == index;
                       final isPastCompleted = index < _selectedDayIndex;
 
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedDayIndex = index;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 220),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? AppColors.nodosDark
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                item['day']!,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: isSelected
-                                      ? Colors.white.withValues(alpha: 0.8)
-                                      : (isDark
-                                          ? AppColors.darkTextMuted
-                                          : AppColors.lightTextMuted),
+                      return Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedDayIndex = index;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 220),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.nodosDark
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  item['day']!,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: isSelected
+                                        ? Colors.white.withValues(alpha: 0.8)
+                                        : (isDark
+                                            ? AppColors.darkTextMuted
+                                            : AppColors.lightTextMuted),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                item['date']!,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w800,
-                                  color: isSelected
-                                      ? Colors.white
-                                      : (isDark
-                                          ? AppColors.darkTextPrimary
-                                          : AppColors.lightTextPrimary),
+                                const SizedBox(height: 4),
+                                Text(
+                                  item['date']!,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w800,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : (isDark
+                                            ? AppColors.darkTextPrimary
+                                            : AppColors.lightTextPrimary),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 6),
-                              // Zincir halkası noktası
-                              Container(
-                                width: 6,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: isSelected
-                                      ? AppColors.accent
-                                      : (isPastCompleted
-                                          ? AppColors.accent
-                                          : (isDark
-                                              ? AppColors.darkBorder
-                                              : AppColors.lightBorder)),
+                                const SizedBox(height: 6),
+                                // Zincir halkası noktası
+                                Container(
+                                  width: 6,
+                                  height: 6,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: isSelected
+                                        ? AppColors.accent
+                                        : (isPastCompleted
+                                            ? AppColors.accent
+                                            : (isDark
+                                                ? AppColors.darkBorder
+                                                : AppColors.lightBorder)),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -278,12 +282,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // 3. Günlük İlerleme Hero Kartı
+            // 3. Günlük İlerleme Hero Kartı (Bugünkü Zincir Durumu)
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 18),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: isDark
@@ -311,29 +315,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Row(
-                            children: [
-                              Icon(
-                                Icons.link_rounded,
-                                color: AppColors.accent,
-                                size: 20,
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                'Bugünkü Zincir Durumu',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
+                          const Icon(
+                            Icons.link_rounded,
+                            color: AppColors.accent,
+                            size: 20,
                           ),
+                          const SizedBox(width: 8),
+                          const Expanded(
+                            child: Text(
+                              'Bugünkü Zincir Durumu',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.5,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
+                              horizontal: 9,
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
@@ -344,7 +347,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               '$completedCount / $totalCount Tamamlandı',
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 11,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -366,18 +369,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 12),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            progress >= 1.0
-                                ? '🎉 Harika! Bugünkü tüm zincirler korundu!'
-                                : 'Bugün 2 halka daha ekle, zinciri kırma!',
-                            style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.8),
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w500,
+                          Expanded(
+                            child: Text(
+                              progress >= 1.0
+                                  ? '🎉 Harika! Bugünkü zincirler korundu!'
+                                  : 'Bugün ${totalCount - completedCount} halka daha ekle, zinciri kırma!',
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.8),
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                           ),
+                          const SizedBox(width: 8),
                           Text(
                             '%${(progress * 100).toInt()}',
                             style: const TextStyle(
@@ -660,15 +667,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: AppColors.accent,
                   ),
                   const SizedBox(width: 5),
-                  Text(
-                    '${isDone ? streak + 1 : streak} Günlük Zincir',
-                    style: const TextStyle(
-                      fontSize: 11.5,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.accent,
+                  Expanded(
+                    child: Text(
+                      '${isDone ? streak + 1 : streak} Günlük Zincir',
+                      style: const TextStyle(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.accent,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 8),
                   // Zincir Halkaları (5 node)
                   Row(
                     children: List.generate(5, (nodeIndex) {
