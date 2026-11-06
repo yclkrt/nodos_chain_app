@@ -17,11 +17,27 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   int _selectedTargetDays = 21; // Popüler 21 günlük alışkanlık kuralı
 
   final List<Map<String, dynamic>> _categories = [
-    {'name': 'Sağlık', 'icon': Icons.favorite_rounded, 'color': Color(0xFF1ABC9C)},
-    {'name': 'Gelişim', 'icon': Icons.menu_book_rounded, 'color': Color(0xFF3498DB)},
-    {'name': 'Zihin', 'icon': Icons.self_improvement_rounded, 'color': Color(0xFF9B59B6)},
+    {
+      'name': 'Sağlık',
+      'icon': Icons.favorite_rounded,
+      'color': Color(0xFF1ABC9C),
+    },
+    {
+      'name': 'Gelişim',
+      'icon': Icons.menu_book_rounded,
+      'color': Color(0xFF3498DB),
+    },
+    {
+      'name': 'Zihin',
+      'icon': Icons.self_improvement_rounded,
+      'color': Color(0xFF9B59B6),
+    },
     {'name': 'Kariyer', 'icon': Icons.code_rounded, 'color': Color(0xFFE67E22)},
-    {'name': 'Spor', 'icon': Icons.fitness_center_rounded, 'color': Color(0xFFE74C3C)},
+    {
+      'name': 'Spor',
+      'icon': Icons.fitness_center_rounded,
+      'color': Color(0xFFE74C3C),
+    },
   ];
 
   final List<int> _targetOptions = [7, 14, 21, 30, 60, 100];
@@ -86,9 +102,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         const SizedBox(width: 14),
                         Text(
                           'Yeni Alışkanlık',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
+                          style: Theme.of(context).textTheme.headlineMedium
                               ?.copyWith(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
@@ -104,10 +118,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     Text(
                       'Yeni bir zincir oluştur ve her gün düzenli olarak takip et.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary,
-                          ),
+                        color: isDark
+                            ? AppColors.darkTextSecondary
+                            : AppColors.lightTextSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -157,7 +171,9 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                               : AppColors.lightTextMuted,
                         ),
                         filled: true,
-                        fillColor: isDark ? AppColors.darkSurface : Colors.white,
+                        fillColor: isDark
+                            ? AppColors.darkSurface
+                            : Colors.white,
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 16,
@@ -219,15 +235,15 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                 color: isSelected
                                     ? color.withValues(alpha: 0.18)
                                     : (isDark
-                                        ? AppColors.darkSurface
-                                        : Colors.white),
+                                          ? AppColors.darkSurface
+                                          : Colors.white),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
                                   color: isSelected
                                       ? color
                                       : (isDark
-                                          ? AppColors.darkBorder
-                                          : AppColors.lightBorder),
+                                            ? AppColors.darkBorder
+                                            : AppColors.lightBorder),
                                   width: isSelected ? 1.5 : 1,
                                 ),
                               ),
@@ -239,8 +255,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                     color: isSelected
                                         ? color
                                         : (isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.lightTextSecondary),
+                                              ? AppColors.darkTextSecondary
+                                              : AppColors.lightTextSecondary),
                                   ),
                                   const SizedBox(width: 8),
                                   Text(
@@ -253,8 +269,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                       color: isSelected
                                           ? color
                                           : (isDark
-                                              ? AppColors.darkTextPrimary
-                                              : AppColors.lightTextPrimary),
+                                                ? AppColors.darkTextPrimary
+                                                : AppColors.lightTextPrimary),
                                     ),
                                   ),
                                 ],
@@ -323,22 +339,20 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                               color: isSelected
                                   ? AppColors.nodosDark
                                   : (isDark
-                                      ? AppColors.darkSurface
-                                      : Colors.white),
+                                        ? AppColors.darkSurface
+                                        : Colors.white),
                               borderRadius: BorderRadius.circular(14),
                               border: Border.all(
                                 color: isSelected
                                     ? AppColors.nodosDark
                                     : (isDark
-                                        ? AppColors.darkBorder
-                                        : AppColors.lightBorder),
+                                          ? AppColors.darkBorder
+                                          : AppColors.lightBorder),
                               ),
                               boxShadow: [
                                 if (isSelected)
                                   BoxShadow(
-                                    color: Colors.black.withValues(
-                                      alpha: 0.18,
-                                    ),
+                                    color: Colors.black.withValues(alpha: 0.18),
                                     blurRadius: 8,
                                     offset: const Offset(0, 3),
                                   ),
@@ -352,8 +366,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                 color: isSelected
                                     ? Colors.white
                                     : (isDark
-                                        ? AppColors.darkTextPrimary
-                                        : AppColors.lightTextPrimary),
+                                          ? AppColors.darkTextPrimary
+                                          : AppColors.lightTextPrimary),
                               ),
                             ),
                           ),
@@ -386,7 +400,11 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.link_rounded, size: 22, color: AppColors.accent),
+                            Icon(
+                              Icons.link_rounded,
+                              size: 22,
+                              color: AppColors.accent,
+                            ),
                             SizedBox(width: 10),
                             Text(
                               'Zinciri Başlat',

@@ -1,9 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'package:nodos_chain_app/features/add_habit/presentation/screens/add_habit_screen.dart';
-import 'package:nodos_chain_app/features/habits/presentation/screens/habits_screen.dart';
-import 'package:nodos_chain_app/features/home/presentation/screens/home_screen.dart';
-import 'package:nodos_chain_app/features/profile/presentation/screens/profile_screen.dart';
-import 'package:nodos_chain_app/features/stats/presentation/screens/stats_screen.dart';
+import 'package:nodos_chain_app/features/add_habit/presentation/page/add_habit_screen.dart';
+import 'package:nodos_chain_app/features/habits/presentation/page/habits_screen.dart';
+import 'package:nodos_chain_app/features/home/presentation/page/home_screen.dart';
+import 'package:nodos_chain_app/features/profile/presentation/page/profile_screen.dart';
+import 'package:nodos_chain_app/features/stats/presentation/page/stats_screen.dart';
 
 /// Uygulama navigasyon rotaları.
 class AppRouter {
@@ -12,10 +12,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: '/',
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const HomeScreen(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(
         path: '/habits',
         builder: (context, state) => const HabitsScreen(),
@@ -24,10 +21,7 @@ class AppRouter {
         path: '/add-habit',
         builder: (context, state) => const AddHabitScreen(),
       ),
-      GoRoute(
-        path: '/stats',
-        builder: (context, state) => const StatsScreen(),
-      ),
+      GoRoute(path: '/stats', builder: (context, state) => const StatsScreen()),
       GoRoute(
         path: '/profile',
         builder: (context, state) => const ProfileScreen(),

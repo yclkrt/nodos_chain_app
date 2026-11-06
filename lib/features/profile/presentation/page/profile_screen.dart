@@ -61,10 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
-                                colors: [
-                                  AppColors.accent,
-                                  Color(0xFF3498DB),
-                                ],
+                                colors: [AppColors.accent, Color(0xFF3498DB)],
                               ),
                             ),
                             child: CircleAvatar(
@@ -101,8 +98,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         vertical: 3,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: AppColors.accent
-                                            .withValues(alpha: 0.14),
+                                        color: AppColors.accent.withValues(
+                                          alpha: 0.14,
+                                        ),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: const Text(
@@ -137,7 +135,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _ProfileStat(label: 'En Uzun Seri', value: '14 Gün'),
+                            _ProfileStat(
+                              label: 'En Uzun Seri',
+                              value: '14 Gün',
+                            ),
                             _ProfileStat(label: 'Toplam Halka', value: '156'),
                             _ProfileStat(label: 'Başarı Oranı', value: '%82'),
                           ],
@@ -185,7 +186,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: 'Günlük Zincir Hatırlatıcı',
                         subtitle: 'Her gün saat 20:00\'de hatırlat',
                         value: _dailyReminder,
-                        onChanged: (val) => setState(() => _dailyReminder = val),
+                        onChanged: (val) =>
+                            setState(() => _dailyReminder = val),
                         isDark: isDark,
                         showDivider: true,
                       ),
@@ -194,7 +196,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: 'Dokunsal Geri Bildirim (Haptic)',
                         subtitle: 'Zincir tamamlandığında titreşim',
                         value: _soundAndHaptics,
-                        onChanged: (val) => setState(() => _soundAndHaptics = val),
+                        onChanged: (val) =>
+                            setState(() => _soundAndHaptics = val),
                         isDark: isDark,
                         showDivider: false,
                       ),
@@ -300,9 +303,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 110),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 110)),
           ],
         ),
       ),
@@ -322,8 +323,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: [
         ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 2,
+          ),
           leading: Container(
             padding: const EdgeInsets.all(9),
             decoration: BoxDecoration(
@@ -385,8 +388,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         ListTile(
           onTap: onTap,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 2,
+          ),
           leading: Container(
             padding: const EdgeInsets.all(9),
             decoration: BoxDecoration(
@@ -423,9 +428,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           trailing: Icon(
             Icons.chevron_right_rounded,
             size: 20,
-            color: isDark
-                ? AppColors.darkTextMuted
-                : AppColors.lightTextMuted,
+            color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
           ),
         ),
         if (showDivider)
@@ -466,9 +469,7 @@ class _ProfileStat extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 11,
-            color: isDark
-                ? AppColors.darkTextMuted
-                : AppColors.lightTextMuted,
+            color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
           ),
         ),
       ],

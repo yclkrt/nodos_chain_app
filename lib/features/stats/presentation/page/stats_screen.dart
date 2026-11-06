@@ -37,9 +37,7 @@ class StatsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Raporlar & Analizler',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
+                      style: Theme.of(context).textTheme.headlineMedium
                           ?.copyWith(
                             fontWeight: FontWeight.w800,
                             letterSpacing: -0.5,
@@ -52,10 +50,10 @@ class StatsScreen extends StatelessWidget {
                     Text(
                       'Zincir sürekliliğin ve genel başarı istatistiklerin.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary,
-                          ),
+                        color: isDark
+                            ? AppColors.darkTextSecondary
+                            : AppColors.lightTextSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -204,8 +202,8 @@ class StatsScreen extends StatelessWidget {
                                   color: isToday
                                       ? AppColors.accent
                                       : (isDark
-                                          ? AppColors.darkTextMuted
-                                          : AppColors.lightTextMuted),
+                                            ? AppColors.darkTextMuted
+                                            : AppColors.lightTextMuted),
                                 ),
                               ),
                               const SizedBox(height: 6),
@@ -216,8 +214,8 @@ class StatsScreen extends StatelessWidget {
                                   color: isToday
                                       ? AppColors.accent
                                       : (isDark
-                                          ? AppColors.darkSurfaceSecondary
-                                          : AppColors.lightNavPill),
+                                            ? AppColors.darkSurfaceSecondary
+                                            : AppColors.lightNavPill),
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: isToday
                                       ? const LinearGradient(
@@ -241,11 +239,11 @@ class StatsScreen extends StatelessWidget {
                                       : FontWeight.w500,
                                   color: isToday
                                       ? (isDark
-                                          ? AppColors.darkTextPrimary
-                                          : AppColors.lightTextPrimary)
+                                            ? AppColors.darkTextPrimary
+                                            : AppColors.lightTextPrimary)
                                       : (isDark
-                                          ? AppColors.darkTextMuted
-                                          : AppColors.lightTextMuted),
+                                            ? AppColors.darkTextMuted
+                                            : AppColors.lightTextMuted),
                                 ),
                               ),
                             ],
@@ -306,9 +304,7 @@ class StatsScreen extends StatelessWidget {
               ),
             ),
 
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 110),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 110)),
           ],
         ),
       ),
@@ -349,11 +345,7 @@ class StatsScreen extends StatelessWidget {
               color: color.withValues(alpha: 0.14),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              icon,
-              color: color,
-              size: 20,
-            ),
+            child: Icon(icon, color: color, size: 20),
           ),
           const SizedBox(height: 12),
           Text(
@@ -419,15 +411,12 @@ class StatsScreen extends StatelessWidget {
               color: isEarned
                   ? AppColors.accent.withValues(alpha: 0.15)
                   : (isDark
-                      ? AppColors.darkSurfaceSecondary
-                      : AppColors.lightNavPill),
+                        ? AppColors.darkSurfaceSecondary
+                        : AppColors.lightNavPill),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Center(
-              child: Text(
-                icon,
-                style: const TextStyle(fontSize: 22),
-              ),
+              child: Text(icon, style: const TextStyle(fontSize: 22)),
             ),
           ),
           const SizedBox(width: 14),

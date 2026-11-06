@@ -37,9 +37,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                       children: [
                         Text(
                           'Zincirlerim',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
+                          style: Theme.of(context).textTheme.headlineMedium
                               ?.copyWith(
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: -0.5,
@@ -91,10 +89,10 @@ class _HabitsScreenState extends State<HabitsScreen> {
                     Text(
                       'Devam eden zincirlerini incele ve ilerlemeni takip et.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary,
-                          ),
+                        color: isDark
+                            ? AppColors.darkTextSecondary
+                            : AppColors.lightTextSecondary,
+                      ),
                     ),
                     const SizedBox(height: 18),
                     // Filtreleme Sekmeleri
@@ -121,15 +119,15 @@ class _HabitsScreenState extends State<HabitsScreen> {
                                 color: isSelected
                                     ? AppColors.nodosDark
                                     : (isDark
-                                        ? AppColors.darkSurface
-                                        : Colors.white),
+                                          ? AppColors.darkSurface
+                                          : Colors.white),
                                 borderRadius: BorderRadius.circular(14),
                                 border: Border.all(
                                   color: isSelected
                                       ? AppColors.nodosDark
                                       : (isDark
-                                          ? AppColors.darkBorder
-                                          : AppColors.lightBorder),
+                                            ? AppColors.darkBorder
+                                            : AppColors.lightBorder),
                                 ),
                                 boxShadow: [
                                   if (isSelected)
@@ -150,8 +148,8 @@ class _HabitsScreenState extends State<HabitsScreen> {
                                   color: isSelected
                                       ? Colors.white
                                       : (isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.lightTextSecondary),
+                                            ? AppColors.darkTextSecondary
+                                            : AppColors.lightTextSecondary),
                                 ),
                               ),
                             ),
@@ -216,9 +214,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 110),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 110)),
           ],
         ),
       ),
@@ -269,11 +265,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                   color: color.withValues(alpha: 0.14),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: Icon(
-                  icon,
-                  color: color,
-                  size: 24,
-                ),
+                child: Icon(icon, color: color, size: 24),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -312,8 +304,8 @@ class _HabitsScreenState extends State<HabitsScreen> {
                   color: isGoalReached
                       ? AppColors.accent.withValues(alpha: 0.15)
                       : (isDark
-                          ? AppColors.darkSurfaceSecondary
-                          : AppColors.lightNavPill),
+                            ? AppColors.darkSurfaceSecondary
+                            : AppColors.lightNavPill),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -337,8 +329,8 @@ class _HabitsScreenState extends State<HabitsScreen> {
                         color: isGoalReached
                             ? AppColors.accent
                             : (isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.lightTextPrimary),
+                                  ? AppColors.darkTextPrimary
+                                  : AppColors.lightTextPrimary),
                       ),
                     ),
                   ],

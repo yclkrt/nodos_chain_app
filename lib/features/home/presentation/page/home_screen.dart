@@ -13,12 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // Alışkanlık tamamlama durumları
-  final Map<int, bool> _completedState = {
-    0: true,
-    1: true,
-    2: false,
-    3: false,
-  };
+  final Map<int, bool> _completedState = {0: true, 1: true, 2: false, 3: false};
 
   int _selectedDayIndex = 4; // Bugün (Cumartesi veya mevcut gün)
 
@@ -104,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.accent.withValues(alpha: 0.15),
+                                  color: AppColors.accent.withValues(
+                                    alpha: 0.15,
+                                  ),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text(
@@ -218,9 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 220),
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8,
-                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? AppColors.nodosDark
@@ -238,8 +233,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: isSelected
                                         ? Colors.white.withValues(alpha: 0.8)
                                         : (isDark
-                                            ? AppColors.darkTextMuted
-                                            : AppColors.lightTextMuted),
+                                              ? AppColors.darkTextMuted
+                                              : AppColors.lightTextMuted),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -251,8 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: isSelected
                                         ? Colors.white
                                         : (isDark
-                                            ? AppColors.darkTextPrimary
-                                            : AppColors.lightTextPrimary),
+                                              ? AppColors.darkTextPrimary
+                                              : AppColors.lightTextPrimary),
                                   ),
                                 ),
                                 const SizedBox(height: 6),
@@ -265,10 +260,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: isSelected
                                         ? AppColors.accent
                                         : (isPastCompleted
-                                            ? AppColors.accent
-                                            : (isDark
-                                                ? AppColors.darkBorder
-                                                : AppColors.lightBorder)),
+                                              ? AppColors.accent
+                                              : (isDark
+                                                    ? AppColors.darkBorder
+                                                    : AppColors.lightBorder)),
                                   ),
                                 ),
                               ],
@@ -291,14 +286,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: isDark
-                          ? [
-                              const Color(0xFF1E2430),
-                              const Color(0xFF161A22),
-                            ]
-                          : [
-                              const Color(0xFF222834),
-                              const Color(0xFF181B23),
-                            ],
+                          ? [const Color(0xFF1E2430), const Color(0xFF161A22)]
+                          : [const Color(0xFF222834), const Color(0xFF181B23)],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -485,9 +474,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // Alt boşluk (Floating bar için bol alan)
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 110),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 110)),
           ],
         ),
       ),
@@ -547,8 +534,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: isDone
                         ? AppColors.accent.withValues(alpha: 0.15)
                         : (isDark
-                            ? AppColors.darkSurfaceSecondary
-                            : AppColors.lightNavPill),
+                              ? AppColors.darkSurfaceSecondary
+                              : AppColors.lightNavPill),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Icon(
@@ -574,11 +561,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               : TextDecoration.none,
                           color: isDone
                               ? (isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.lightTextSecondary)
+                                    ? AppColors.darkTextSecondary
+                                    : AppColors.lightTextSecondary)
                               : (isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.lightTextPrimary),
+                                    ? AppColors.darkTextPrimary
+                                    : AppColors.lightTextPrimary),
                         ),
                       ),
                       const SizedBox(height: 3),
@@ -626,16 +613,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 38,
                   width: 38,
                   decoration: BoxDecoration(
-                    color: isDone
-                        ? AppColors.accent
-                        : Colors.transparent,
+                    color: isDone ? AppColors.accent : Colors.transparent,
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: isDone
                           ? AppColors.accent
                           : (isDark
-                              ? AppColors.darkBorder
-                              : AppColors.lightBorder),
+                                ? AppColors.darkBorder
+                                : AppColors.lightBorder),
                       width: 1.8,
                     ),
                   ),
@@ -683,7 +668,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     children: List.generate(5, (nodeIndex) {
                       final isLast = nodeIndex == 4;
-                      final nodeFilled = isLast ? isDone : (recentStreak.length > nodeIndex ? recentStreak[nodeIndex] : false);
+                      final nodeFilled = isLast
+                          ? isDone
+                          : (recentStreak.length > nodeIndex
+                                ? recentStreak[nodeIndex]
+                                : false);
 
                       return Row(
                         children: [
@@ -699,8 +688,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: nodeFilled
                                     ? AppColors.accent
                                     : (isDark
-                                        ? AppColors.darkBorder
-                                        : AppColors.lightBorder),
+                                          ? AppColors.darkBorder
+                                          : AppColors.lightBorder),
                                 width: 1.5,
                               ),
                             ),
@@ -709,11 +698,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             Container(
                               width: 8,
                               height: 1.5,
-                              color: (nodeFilled && (recentStreak.length > nodeIndex + 1 ? recentStreak[nodeIndex + 1] : false))
+                              color:
+                                  (nodeFilled &&
+                                      (recentStreak.length > nodeIndex + 1
+                                          ? recentStreak[nodeIndex + 1]
+                                          : false))
                                   ? AppColors.accent
                                   : (isDark
-                                      ? AppColors.darkBorder
-                                      : AppColors.lightBorder),
+                                        ? AppColors.darkBorder
+                                        : AppColors.lightBorder),
                             ),
                         ],
                       );
