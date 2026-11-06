@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nodos_chain_app/core/theme/app_colors.dart';
 import 'package:nodos_chain_app/widgets/common/custom_bottom_nav_bar.dart';
 
-/// Tüm alışkanlıkları ve zincirleri listeleyen ekran.
+/// Alışkanlıklar ve tüm zincirlerin yönetildiği modern liste ekranı.
 class HabitsScreen extends StatefulWidget {
   const HabitsScreen({super.key});
 
@@ -12,7 +12,7 @@ class HabitsScreen extends StatefulWidget {
 
 class _HabitsScreenState extends State<HabitsScreen> {
   int _selectedFilter = 0;
-  final List<String> _filters = ['Tümü', 'Aktif', 'Tamamlanan'];
+  final List<String> _filters = ['Tümü (4)', 'Aktif (3)', 'Tamamlanan (1)'];
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +20,29 @@ class _HabitsScreenState extends State<HabitsScreen> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      extendBody: true,
       body: SafeArea(
+        bottom: false,
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
           slivers: [
+            // Üst Başlık & Filtreler
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 28, 24, 16),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 14),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Text(
-                          'Alışkanlıklarım',
+                          'Zincirlerim',
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
                               ?.copyWith(
                                 fontWeight: FontWeight.w800,
+                                letterSpacing: -0.5,
                                 color: isDark
                                     ? AppColors.darkTextPrimary
                                     : AppColors.lightTextPrimary,
@@ -54,24 +59,27 @@ class _HabitsScreenState extends State<HabitsScreen> {
                                 ? AppColors.darkSurfaceSecondary
                                 : AppColors.lightNavPill,
                             borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: isDark
+                                  ? AppColors.darkBorder
+                                  : AppColors.lightBorder,
+                            ),
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.link_rounded,
                                 size: 16,
                                 color: AppColors.accent,
                               ),
-                              const SizedBox(width: 6),
+                              SizedBox(width: 5),
                               Text(
-                                '3 Aktif Zincir',
+                                '3 Aktif',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.lightTextPrimary,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.accent,
                                 ),
                               ),
                             ],
@@ -79,107 +87,135 @@ class _HabitsScreenState extends State<HabitsScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     Text(
-                      'Zincirlerini takip et, hedeflerine adım adım ulaş.',
+                      'Devam eden zincirlerini incele ve ilerlemeni takip et.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: isDark
                                 ? AppColors.darkTextSecondary
                                 : AppColors.lightTextSecondary,
                           ),
                     ),
-                    const SizedBox(height: 20),
-                    // Filtreleme Çubukları
-                    Row(
-                      children: List.generate(_filters.length, (index) {
-                        final isSelected = _selectedFilter == index;
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedFilter = index;
-                            });
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            margin: const EdgeInsets.only(right: 10),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? AppColors.nodosDark
-                                  : (isDark
-                                      ? AppColors.darkSurfaceSecondary
-                                      : AppColors.lightNavPill),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              _filters[index],
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
+                    const SizedBox(height: 18),
+                    // Filtreleme Sekmeleri
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      child: Row(
+                        children: List.generate(_filters.length, (index) {
+                          final isSelected = _selectedFilter == index;
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedFilter = index;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              margin: const EdgeInsets.only(right: 10),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 9,
+                              ),
+                              decoration: BoxDecoration(
                                 color: isSelected
-                                    ? Colors.white
+                                    ? AppColors.nodosDark
                                     : (isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.lightTextSecondary),
+                                        ? AppColors.darkSurface
+                                        : Colors.white),
+                                borderRadius: BorderRadius.circular(14),
+                                border: Border.all(
+                                  color: isSelected
+                                      ? AppColors.nodosDark
+                                      : (isDark
+                                          ? AppColors.darkBorder
+                                          : AppColors.lightBorder),
+                                ),
+                                boxShadow: [
+                                  if (isSelected)
+                                    BoxShadow(
+                                      color: Colors.black.withValues(
+                                        alpha: 0.15,
+                                      ),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                ],
+                              ),
+                              child: Text(
+                                _filters[index],
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : (isDark
+                                          ? AppColors.darkTextSecondary
+                                          : AppColors.lightTextSecondary),
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
+
+            // Alışkanlık İlerleme Kartları
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  _habitRow(
+                  _habitProgressCard(
                     context: context,
                     title: 'Sabah Yürüyüşü',
-                    category: 'Sağlık',
+                    category: 'Sağlık & Zindelik',
                     streak: 12,
-                    target: '30 gün',
+                    goalDays: 30,
                     icon: Icons.directions_walk_rounded,
+                    color: const Color(0xFF1ABC9C),
                     isDark: isDark,
                   ),
                   const SizedBox(height: 14),
-                  _habitRow(
+                  _habitProgressCard(
                     context: context,
                     title: 'Su İçme (2.5L)',
-                    category: 'Beslenme',
+                    category: 'Sağlıklı Yaşam',
                     streak: 7,
-                    target: '14 gün',
+                    goalDays: 14,
                     icon: Icons.water_drop_rounded,
+                    color: const Color(0xFF3498DB),
                     isDark: isDark,
                   ),
                   const SizedBox(height: 14),
-                  _habitRow(
+                  _habitProgressCard(
                     context: context,
                     title: 'Kitap Okuma (20 sf)',
                     category: 'Kişisel Gelişim',
                     streak: 3,
-                    target: '21 gün',
+                    goalDays: 21,
                     icon: Icons.menu_book_rounded,
+                    color: const Color(0xFFE67E22),
                     isDark: isDark,
                   ),
                   const SizedBox(height: 14),
-                  _habitRow(
+                  _habitProgressCard(
                     context: context,
-                    title: 'Meditasyon',
-                    category: 'Farkındalık',
-                    streak: 1,
-                    target: '7 gün',
+                    title: 'Meditasyon & Nefes',
+                    category: 'Zihinsel Sağlık',
+                    streak: 14,
+                    goalDays: 14,
                     icon: Icons.self_improvement_rounded,
+                    color: const Color(0xFF9B59B6),
                     isDark: isDark,
                   ),
                 ]),
               ),
             ),
+
             const SliverToBoxAdapter(
               child: SizedBox(height: 110),
             ),
@@ -190,65 +226,71 @@ class _HabitsScreenState extends State<HabitsScreen> {
     );
   }
 
-  Widget _habitRow({
+  Widget _habitProgressCard({
     required BuildContext context,
     required String title,
     required String category,
     required int streak,
-    required String target,
+    required int goalDays,
     required IconData icon,
+    required Color color,
     required bool isDark,
   }) {
+    final progress = (streak / goalDays).clamp(0.0, 1.0);
+    final isGoalReached = streak >= goalDays;
+
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-        borderRadius: BorderRadius.circular(18),
+        color: isDark ? AppColors.darkSurface : Colors.white,
+        borderRadius: BorderRadius.circular(22),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-          width: 1,
+          color: isGoalReached
+              ? AppColors.accent.withValues(alpha: 0.5)
+              : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+          width: isGoalReached ? 1.5 : 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.04),
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.03),
             blurRadius: 14,
             offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? AppColors.darkSurfaceSecondary
-                  : AppColors.lightNavPill,
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(
-              icon,
-              color: isDark ? Colors.white : AppColors.nodosDark,
-              size: 24,
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(11),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(
+                  icon,
+                  color: color,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: isDark
                             ? AppColors.darkTextPrimary
                             : AppColors.lightTextPrimary,
                       ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
+                    ),
+                    const SizedBox(height: 3),
                     Text(
                       category,
                       style: TextStyle(
@@ -258,56 +300,87 @@ class _HabitsScreenState extends State<HabitsScreen> {
                             : AppColors.lightTextMuted,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkTextMuted
-                            : AppColors.lightTextMuted,
-                        shape: BoxShape.circle,
-                      ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: isGoalReached
+                      ? AppColors.accent.withValues(alpha: 0.15)
+                      : (isDark
+                          ? AppColors.darkSurfaceSecondary
+                          : AppColors.lightNavPill),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      isGoalReached
+                          ? Icons.emoji_events_rounded
+                          : Icons.local_fire_department_rounded,
+                      size: 15,
+                      color: isGoalReached
+                          ? AppColors.accent
+                          : const Color(0xFFFF6B4A),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 4),
                     Text(
-                      'Hedef: $target',
+                      '$streak gün',
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightTextSecondary,
+                        fontWeight: FontWeight.w800,
+                        color: isGoalReached
+                            ? AppColors.accent
+                            : (isDark
+                                ? AppColors.darkTextPrimary
+                                : AppColors.lightTextPrimary),
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: AppColors.accent.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.local_fire_department_rounded,
-                  size: 16,
-                  color: AppColors.accent,
+          const SizedBox(height: 16),
+          // Hedef İlerleme Çubuğu
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Hedef: $goalDays Günlük Zincir',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: isDark
+                      ? AppColors.darkTextSecondary
+                      : AppColors.lightTextSecondary,
                 ),
-                const SizedBox(width: 4),
-                Text(
-                  '$streak gün',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.accent,
-                  ),
+              ),
+              Text(
+                '%${(progress * 100).toInt()}',
+                style: TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w800,
+                  color: color,
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 7),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 6.5,
+              backgroundColor: isDark
+                  ? AppColors.darkSurfaceSecondary
+                  : AppColors.lightNavPill,
+              valueColor: AlwaysStoppedAnimation<Color>(color),
             ),
           ),
         ],
@@ -315,4 +388,3 @@ class _HabitsScreenState extends State<HabitsScreen> {
     );
   }
 }
-
