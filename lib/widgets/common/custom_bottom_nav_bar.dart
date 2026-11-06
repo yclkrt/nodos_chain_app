@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icon_plus/icon_plus.dart';
 import 'package:nodos_chain_app/core/providers/navigation_provider.dart';
 import 'package:nodos_chain_app/core/theme/app_colors.dart';
 import 'package:nodos_chain_app/widgets/common/nodos_logo.dart';
@@ -54,8 +55,8 @@ class CustomBottomNavBar extends ConsumerWidget {
                   Expanded(
                     child: _BottomNavTab(
                       label: 'Anasayfa',
-                      icon: Icons.calendar_today_outlined,
-                      activeIcon: Icons.calendar_today_rounded,
+                      icon: FontAwesome.house_solid,
+                      activeIcon: FontAwesome.house_solid,
                       route: '/',
                       isSelected: location == '/',
                       isDark: isDark,
@@ -70,8 +71,8 @@ class CustomBottomNavBar extends ConsumerWidget {
                   Expanded(
                     child: _BottomNavTab(
                       label: 'Zincirler',
-                      icon: Icons.format_list_bulleted_rounded,
-                      activeIcon: Icons.format_list_bulleted_rounded,
+                      icon: FontAwesome.link_solid,
+                      activeIcon: FontAwesome.link_solid,
                       route: '/habits',
                       isSelected: location == '/habits',
                       isDark: isDark,
@@ -95,8 +96,8 @@ class CustomBottomNavBar extends ConsumerWidget {
                   Expanded(
                     child: _BottomNavTab(
                       label: 'Raporlar',
-                      icon: Icons.bar_chart_rounded,
-                      activeIcon: Icons.bar_chart_rounded,
+                      icon: FontAwesome.chart_simple_solid,
+                      activeIcon: FontAwesome.chart_simple_solid,
                       route: '/stats',
                       isSelected: location == '/stats',
                       isDark: isDark,
@@ -111,8 +112,8 @@ class CustomBottomNavBar extends ConsumerWidget {
                   Expanded(
                     child: _BottomNavTab(
                       label: 'Profil',
-                      icon: Icons.tune_rounded,
-                      activeIcon: Icons.tune_rounded,
+                      icon: FontAwesome.user_gear_solid,
+                      activeIcon: FontAwesome.user_gear_solid,
                       route: '/profile',
                       isSelected: location == '/profile',
                       isDark: isDark,
@@ -195,7 +196,7 @@ class _BottomNavTabState extends State<_BottomNavTab> {
               ),
               child: Icon(
                 widget.isSelected ? widget.activeIcon : widget.icon,
-                size: 21,
+                size: 18,
                 color: widget.isSelected ? activeTextColor : inactiveTextColor,
               ),
             ),
@@ -254,8 +255,8 @@ class _CenterActionTabState extends State<_CenterActionTab> {
           children: [
             // Dairesel Koyu Buton
             Container(
-              height: 44,
-              width: 44,
+              height: 60,
+              width: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: const LinearGradient(
@@ -283,25 +284,10 @@ class _CenterActionTabState extends State<_CenterActionTab> {
               ),
               child: Center(
                 child: NodosLogo(
-                  size: 22,
+                  size: 30,
                   color: Colors.white,
                   chainColor: AppColors.accent,
                 ),
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              'Yeni Zincir',
-              style: TextStyle(
-                fontSize: 9.5,
-                fontWeight: widget.isSelected
-                    ? FontWeight.w700
-                    : FontWeight.w600,
-                color: widget.isSelected
-                    ? AppColors.accent
-                    : (widget.isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.lightTextSecondary),
               ),
             ),
           ],
