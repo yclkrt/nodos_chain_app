@@ -474,7 +474,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // Alt boşluk (Floating bar için bol alan)
-            const SliverToBoxAdapter(child: SizedBox(height: 110)),
+            const SliverToBoxAdapter(child: SizedBox(height: 130)),
           ],
         ),
       ),

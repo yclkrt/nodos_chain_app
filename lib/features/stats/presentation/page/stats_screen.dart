@@ -304,7 +304,7 @@ class StatsScreen extends StatelessWidget {
               ),
             ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 110)),
+            const SliverToBoxAdapter(child: SizedBox(height: 130)),
           ],
         ),
       ),

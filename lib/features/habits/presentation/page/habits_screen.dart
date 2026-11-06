@@ -214,7 +214,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 110)),
+            const SliverToBoxAdapter(child: SizedBox(height: 130)),
           ],
         ),
       ),
